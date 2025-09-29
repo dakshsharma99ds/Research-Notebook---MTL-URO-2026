@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Research Notebook</title>
+  <style>
+    /* Global */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f9fafc;
+      color: #222;
+      line-height: 1.6;
+    }
+    h1,h2,h3 {color:#222; margin-bottom:10px;}
+    section {padding:60px 20px; max-width:1100px; margin:auto;}
+
+    /* Navbar */
+    nav {
+      position:fixed; top:0; left:0; width:100%;
+      background:#0a2342; color:#fff;
+      display:flex; justify-content:center; gap:20px;
+      padding:15px 0; z-index:1000;
+    }
+    nav a {
+      color:#fff; text-decoration:none; font-weight:500;
+      transition:color 0.3s;
+    }
+    nav a:hover {color:#7fdbff;}
+
+    /* Hero */
+    .hero {
+      height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      background: linear-gradient(135deg, #d9e9ff, #f2f7ff);
+      padding:0 20px;
+    }
+    .hero h1 {font-size:2.5rem; margin-bottom:15px;}
+    .hero p {font-size:1.2rem; max-width:700px;}
+
+    /* About */
+    .about {
+      display:flex; flex-wrap:wrap; align-items:center; gap:30px;
+    }
+    .about img {
+      width:250px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+    .about-text {flex:1;}
+
+    /* Journey timeline */
+    .timeline {
+      border-left:3px solid #0a2342; padding-left:20px;
+    }
+    .timeline div {
+      margin-bottom:20px;
+    }
+    .timeline h3 {color:#0a2342;}
+
+    /* Notes */
+    .notes {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:20px;
+    }
+    .note {
+      background:#fff; padding:20px; border-radius:12px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Simulators */
+    .simulator {
+      margin-bottom:40px; text-align:center;
+    }
+    canvas {
+      border:1px solid #ccc; background:#fff;
+      border-radius:8px; margin-top:10px;
+    }
+
+    /* Labs & Papers */
+    .cards {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:20px;
+    }
+    .card {
+      background:#fff; padding:20px; border-radius:12px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Vision */
+    .vision {
+      background:#e9f2ff; border-radius:12px; padding:40px;
+      text-align:center; font-size:1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background:#0a2342; color:#fff; text-align:center;
+      padding:20px;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .about {flex-direction:column; text-align:center;}
+      .about img {width:180px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#notes">Notes</a>
+    <a href="#simulators">Simulators</a>
+    <a href="#labs">Labs</a>
+    <a href="#vision">Vision</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <h1>My Research Notebook</h1>
+    <p>Curiosity is my compass, research is my path. This is where I document my journey, my questions, and my experiments as I grow into a researcher.</p>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about">
+      <img src="https://via.placeholder.com/250" alt="Profile Picture">
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>I’m a 2nd-year interdisciplinary student, aspiring researcher, and explorer of labs & ideas. My aim is to contribute to the Matter to Life URO Program at Max Planck by combining curiosity, adaptability, and resilience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey -->
+  <section id="journey">
+    <h2>My Research Journey</h2>
+    <div class="timeline">
+      <div>
+        <h3>School Days</h3>
+        <p>Discovered curiosity for science and research thinking.</p>
+      </div>
+      <div>
+        <h3>Now</h3>
+        <p>Building foundations in labs, coding, and interdisciplinary learning.</p>
+      </div>
+      <div>
+        <h3>Future</h3>
+        <p>Contribute globally through programs like Matter to Life at Max Planck.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notes -->
+  <section id="notes">
+    <h2>Notes & Questions</h2>
+    <div class="notes">
+      <div class="note">
+        <h3>Protein Folding Basics</h3>
+        <p>Notes on how proteins fold and why misfolding matters in diseases.</p>
+      </div>
+      <div class="note">
+        <h3>Entropy in Biology</h3>
+        <p>Exploring how entropy plays a role in cellular processes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulators -->
+  <section id="simulators">
+    <h2>Visual Simulators</h2>
+    <div class="simulator">
+      <h3>Random Diffusion</h3>
+      <canvas id="diffusionCanvas" width="400" height="300"></canvas>
+    </div>
+    <div class="simulator">
+      <h3>DNA Helix Animation</h3>
+      <canvas id="dnaCanvas" width="400" height="300"></canvas>
+    </div>
+  </section>
+
+  <!-- Labs -->
+  <section id="labs">
+    <h2>Research Papers & Labs</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Zacharias Lab, TUM</h3>
+        <p>Exploring DNA blunt end stacking.</p>
+      </div>
+      <div class="card">
+        <h3>Paper: CRISPR-Cas9</h3>
+        <p>My summary of genome editing tools and implications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision -->
+  <section id="vision">
+    <div class="vision">
+      <h2>My Vision</h2>
+      <p>I may come from limited resources, but I’ve built my own lab through curiosity, my own research journal through consistency, and my own path through resilience. I don’t just want to observe research — I want to live it, grow through it, and contribute back.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: yourname@email.com</p>
+    <p>LinkedIn: linkedin.com/in/yourprofile</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 My Research Notebook | Built with Curiosity 🔬</p>
+  </footer>
+
+
+  <!-- Retro 90s About Me Section -->
+  <section id="aboutme" style="padding:80px 20px; max-width:1000px; margin:auto;">
+    <h1 style="text-align: center; font-size: 60px; font-family: 'Poppins',cursive; margin-top: -40px; color: rgb(135, 135, 226);">About Me!!</h1>
+    <p></p>
+    <!-- Card 1 -->
+    <div class="story-row window-card" style="flex-wrap:wrap; background:#fff9dc; border:2px solid #d4c97f; border-radius:5px; box-shadow:5px 5px 0px #b0a76c; margin-bottom:60px; overflow:hidden;">
+        <div class="window-header" style="background:#f5e49c; padding:6px 12px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #d4c97f; width:100%;">
+            <div class="title" style="font-weight:bold; font-family:'Courier New', monospace;">Childhood Observations</div>
+            <div class="buttons" style="display:flex; gap:6px;">
+                <span class="red" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ff5f56;"></span>
+                <span class="yellow" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ffbd2e;"></span>
+                <span class="green" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#27c93f;"></span>
+            </div>
+        </div>
+        <div class="window-content" style="display:flex; flex-wrap:wrap; padding:20px; gap:20px; align-items:center;">
+            <img src="image copy 2.png" alt="Dead Fish" style="width:45%; border:2px solid #d4c97f; border-radius:8px; box-shadow:3px 3px 0px #b0a76c; object-fit:cover;">
+            <div class="window-text" style="width:50%; font-family:'Courier New', monospace; line-height:1.5; color:#222;">
+                <h2>Curiosity from Childhood</h2>
+                <p>Even as a child, I loved exploring life — observing insects, caring for tiny creatures, and examining dead fish to understand life processes. That curiosity shaped my future research mindset.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="story-row window-card" style="flex-wrap:wrap; background:#fff9dc; border:2px solid #d4c97f; border-radius:5px; box-shadow:5px 5px 0px #b0a76c; margin-bottom:60px; overflow:hidden;">
+        <div class="window-header" style="background:#f5e49c; padding:6px 12px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #d4c97f; width:100%;">
+            <div class="title" style="font-weight:bold; font-family:'Courier New', monospace;">Sky & Nature Observations</div>
+            <div class="buttons" style="display:flex; gap:6px;">
+                <span class="red" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ff5f56;"></span>
+                <span class="yellow" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ffbd2e;"></span>
+                <span class="green" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#27c93f;"></span>
+            </div>
+        </div>
+        <div class="window-content" style="display:flex; flex-wrap:wrap; padding:20px; gap:20px; align-items:center;">
+            <img src="image copy.png" alt="Looking Outside" style="width:45%; border:2px solid #d4c97f; border-radius:8px; box-shadow:3px 3px 0px #b0a76c; object-fit:cover;">
+            <div class="window-text" style="width:50%; font-family:'Courier New', monospace; line-height:1.5; color:#222;">
+                <h2>Wondering About Life</h2>
+                <p>Every glance at the sky, the moon, or the world outside sparked questions — about nature, biology, and life itself. Observing patterns in nature was my first step towards research methodology.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="story-row window-card" style="flex-wrap:wrap; background:#fff9dc; border:2px solid #d4c97f; border-radius:5px; box-shadow:5px 5px 0px #b0a76c; margin-bottom:60px; overflow:hidden;">
+        <div class="window-header" style="background:#f5e49c; padding:6px 12px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #d4c97f; width:100%;">
+            <div class="title" style="font-weight:bold; font-family:'Courier New', monospace;">Hands-On Labs</div>
+            <div class="buttons" style="display:flex; gap:6px;">
+                <span class="red" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ff5f56;"></span>
+                <span class="yellow" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#ffbd2e;"></span>
+                <span class="green" style="width:12px;height:12px;border-radius:50%;display:inline-block;background:#27c93f;"></span>
+            </div>
+        </div>
+        <div class="window-content" style="display:flex; flex-wrap:wrap; padding:20px; gap:20px; align-items:center;">
+            <img src="https://via.placeholder.com/400x300?text=Lab+Work" alt="Lab Work" style="width:45%; border:2px solid #d4c97f; border-radius:8px; box-shadow:3px 3px 0px #b0a76c; object-fit:cover;">
+            <div class="window-text" style="width:50%; font-family:'Courier New', monospace; line-height:1.5; color:#222;">
+                <h2>Hands-on Exploration</h2>
+                <p>My curiosity drives me to labs and simulations. I document experiments, analyze results, and build small models to understand unseen phenomena. Learning by doing is my research approach.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collage -->
+    <h2 style="text-align:center; margin:40px 0;">Journey in Figures</h2>
+    <div class="collage">
+        <img src="https://via.placeholder.com/300x200?text=Notes" alt="Notes">
+        <img src="https://via.placeholder.com/300x200?text=Simulations" alt="Simulations">
+        <img src="https://via.placeholder.com/300x200?text=Labs" alt="Labs">
+        <img src="https://via.placeholder.com/300x200?text=Reading+Papers" alt="Reading Papers">
+        <img src="https://via.placeholder.com/300x200?text=Coding" alt="Coding">
+        <img src="https://via.placeholder.com/300x200?text=Sky+Observations" alt="Sky Observations">
+    </div>
+  </section>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+
+    window.addEventListener('click', function(e){
+      if(!hamburger.contains(e.target) && !navMenu.contains(e.target)){
+        navMenu.classList.remove('show');
+        hamburger.classList.remove('active');
+      }
+    });
+
+    // Scroll Animation for About Me Section
+    const rows = document.querySelectorAll('.window-card');
+    function checkVisible() {
+      const triggerBottom = window.innerHeight * 0.85;
+      rows.forEach(row => {
+        const rowTop = row.getBoundingClientRect().top;
+        if(rowTop < triggerBottom){
+          row.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkVisible);
+    window.addEventListener('load', checkVisible);
+  </script> 
+  <!-- Scripts -->
+  <script>
+    // Random Diffusion
+    const canvas = document.getElementById("diffusionCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    for (let i=0;i<50;i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: 3,
+        dx: (Math.random()-0.5)*2,
+        dy: (Math.random()-0.5)*2
+      });
+    }
+    function animateDiffusion(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="blue";
+        ctx.fill();
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+      });
+      requestAnimationFrame(animateDiffusion);
+    }
+    animateDiffusion();
+
+    // DNA Helix
+    const dnaCanvas = document.getElementById("dnaCanvas");
+    const dnaCtx = dnaCanvas.getContext("2d");
+    let angle=0;
+    function drawDNA(){
+      dnaCtx.clearRect(0,0,dnaCanvas.width,dnaCanvas.height);
+      let centerX = dnaCanvas.width/2;
+      for(let i=0;i<30;i++){
+        let y = i*10;
+        let xOffset = Math.sin(angle + i*0.3)*60;
+        dnaCtx.beginPath();
+        dnaCtx.arc(centerX+xOffset, y+20, 4, 0, Math.PI*2);
+        dnaCtx.fillStyle="purple"; dnaCtx.fill();
+        dnaCtx.beginPath();
+        dnaCtx.arc(centerX-xOffset, y+20, 4, 0, Math.PI*2);
+        dnaCtx.fillStyle="green"; dnaCtx.fill();
+      }
+      angle+=0.05;
+      requestAnimationFrame(drawDNA);
+    }
+    drawDNA();
+  </script>
+</body>
+</html>

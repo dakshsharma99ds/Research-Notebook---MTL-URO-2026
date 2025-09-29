@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Research Journey - Saloni Joshi</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #fdfdfd;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .story {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    .story.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .highlight {
+      color: #0073e6;
+      font-weight: 600;
+    }
+
+    blockquote {
+      font-style: italic;
+      background: #f0f8ff;
+      padding: 15px 20px;
+      border-left: 4px solid #0073e6;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h1>🌍 My Research Journey</h1>
+
+    <div class="story">Hi, I’m <span class="highlight">Saloni Joshi</span>.  
+      For me, this is not just an application — it is my <span class="highlight">first real step into research</span>. I believe courage, curiosity, and self-learning are the foundation of discovery.
+    </div>
+
+    <div class="story">💡 <strong>My Lab from Scratch</strong>  
+      When I first encountered the research of <em>Matter to Life</em>, I didn’t understand a single word. But instead of stepping back, I built my own <span class="highlight">mini-lab — simulations, visualizations, and tools</span> from scratch. These may look simple, but they represent my determination to learn, explore, and create.
+    </div>
+
+    <div class="story">⚡ <strong>Smart Work Strategy</strong>  
+      I chose to focus on depth over breadth. That’s why I built a clear hero section, a structured About Me, and a research draft with interactive tools. Together, these reflect not only my skills but also <span class="highlight">how I think, how I learn, and how I solve problems</span>.
+    </div>
+
+    <div class="story">🚀 <strong>Storyline to Germany</strong>  
+      I believe deeply: <em>“I am already on my way to Germany, and God is with me.”</em>  
+      This fearless conviction gives me strength. Even if I am not selected today, my journey has already begun — and some of the brightest researchers have already resonated with my curiosity.
+    </div>
+
+    <div class="story">💪 <strong>Energy & Resilience</strong>  
+      Yes, I am writing this through fever and migraine — but that only makes my commitment stronger. Research is not about being perfect; it is about persistence, balance, and the will to push forward.
+    </div>
+
+    <div class="story">✨ <strong>Why This Matters</strong>  
+      This project is not just a “submission.”  
+      It is the story of how I transformed confusion into creation, and fear into faith.
+      <blockquote>
+        “When I first saw your work, I didn’t understand a single word.  
+        But I decided to build my own mini-lab to learn.  
+        This project is the result of my journey to understand and contribute.”
+      </blockquote>
+    </div>
+  </section>
+
+  <script>
+    // Fade-in on scroll effect
+    const stories = document.querySelectorAll('.story');
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      stories.forEach(story => {
+        const boxTop = story.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+          story.classList.add('show');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Run on page load
+  </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Research Notebook</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  background: #f7f8fc;
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+header {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200,200,200,0.3);
+  z-index: 1000;
+}
+.logo { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: #212020; display: flex; align-items: center; gap: 10px; }
+.logo-img { width: 45px; height: 45px; object-fit: contain; }
+nav { display: flex; gap: 1.5rem; font-weight: 500; }
+nav a { position: relative; padding: 0.5rem 0; color: #333; }
+nav a::after { content: ''; position: absolute; width: 0; height: 3px; background: #3b3b98; left: 0; bottom: 0; transition: 0.3s; }
+nav a:hover::after { width: 100%; }
+
+.menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+.menu-toggle span { background: #333; height: 3px; width: 25px; border-radius: 2px; }
+@media(max-width:768px){
+  nav { display: none; flex-direction: column; width: 100%; margin-top: 1rem; }
+  nav.active { display: flex; }
+  .menu-toggle { display: flex; }
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80%;
+  height: 80vh;
+  margin: 30px auto;
+  padding: 60px 20px;
+  background: linear-gradient(136deg,rgb(230, 208, 208),rgb(197, 231, 180));
+  border-radius: 30px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+.hero-left { flex: 1 1 400px; padding-right: 20px; }
+.hero-left h1 {
+  font-family:'Fredoka One',sans-serif; /* scientific coding-like font */
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #a9372a;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-family: 'Pacifico';
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  min-height: 30px;
+  color: #575758;
+}
+
+.hero-actions { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+.cta { background: rgba(59,59,152,0.9); color: #fff; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; margin-right: 10px; font-weight: 700; font-family: 'Baloo 2', cursive; transition: 0.3s; }
+.cta:hover { background: rgba(27, 90, 154, 0.9); transform: translateY(-2px); }
+.cta.secondary { background: #f0faff; color: #3b3b98; border: 2px solid #3b3b98; }
+.cta.secondary:hover { background: #111111; color: #fff; transform: translateY(-2px); }
+
+.callouts { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 10px; }
+.callout { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+.callout .muted { font-size: 0.8rem; color: #555; }
+
+.hero-small-meta { font-size: 0.85rem; color: #555; }
+
+.hero-right { flex: 1 1 350px; display: flex; justify-content: center; align-items: center; margin-top: 20px; }
+.hero-right img { width: 100%; max-width: 500px; height: auto; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+/* Sections */
+section { padding: 3rem 1rem; max-width: 900px; margin: auto; }
+h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; font-family: 'Fredoka One', cursive; color: #3b3b98; text-shadow: 1px 1px 3px rgba(0,0,0,0.05); }
+section p { margin-bottom: 1rem; color: #444; line-height: 1.7; }
+
+/* Cards */
+.card-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card { flex: 1 1 250px; border-radius: 20px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; background: linear-gradient(145deg, #f0f8ff, #eaf7ff, #ffffff); }
+.card:hover { transform: translateY(-5px); }
+.card img { width: 50px; height: 50px; margin-bottom: 10px; }
+.card h3 { font-size: 1.3rem; margin-bottom: 5px; font-family: 'Baloo 2', cursive; color: #2e86de; }
+.card p { font-size: 0.95rem; color: #555; }
+
+/* Footer */
+footer { text-align: center; padding: 2rem 1rem; color: #555; margin-top: 3rem; font-size: 0.9rem; }
+
+/* Responsive adjustments */
+@media(max-width:1024px) {
+  .hero { flex-direction: column; margin-top: 140px; padding: 50px 20px; }
+  .hero-left { padding-right: 0; }
+}
+
+@media(max-width:768px) {
+  .hero-left h1 { font-size: 2.2rem; text-align: center; }
+  .tagline { text-align: center; font-size: 1.1rem; }
+  .hero-right { margin-top: 30px; }
+  .hero-actions { justify-content: center; }
+  .card-container { flex-direction: column; align-items: center; }
+}
+
+@media(max-width:480px) {
+  .hero-left h1 { font-size: 1.8rem; }
+  .tagline { font-size: 1rem; }
+  .cta { padding: 10px 20px; font-size: 0.9rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+  <a href="#home" class="logo">
+    <img src="image.png" alt="Logo" class="logo-img">
+    My Research Notebook
+  </a>
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About Me</a>
+    <a href="#journey">My Journey</a>
+    <a href="#labs">Labs</a>
+    <a href="#mvp">MVP / Simulation</a>
+    <a href="#reflection">Reflection</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+  <div class="hero-left">
+    <h1>Welcome to My Research Journey</h1>
+    <div class="tagline" id="typing-line"></div>
+    <div class="hero-actions">
+      <button class="cta" onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">Start Journey</button>
+      <button class="cta secondary" onclick="document.getElementById('mvp').scrollIntoView({behavior:'smooth'})">See MVP</button>
+    </div>
+    <div class="callouts">
+      <div class="callout">
+        <img src="notes-icon.svg" alt="Notes Icon">
+        <div><strong>Notes</strong><div class="muted">Daily observations</div></div>
+      </div>
+      <div class="callout">
+        <img src="papers-icon.svg" alt="Papers Icon">
+        <div><strong>Papers</strong><div class="muted">Research insights</div></div>
+      </div>
+      <div class="callout">
+        <img src="simulation-icon.svg" alt="Simulations Icon">
+        <div><strong>Simulations</strong><div class="muted">Visualizations & MVPs</div></div>
+      </div>
+    </div>
+    <div class="hero-small-meta">Documented with care • Created for clarity</div>
+  </div>
+  <div class="hero-right">
+    <img src="Medical research-cuate.svg" alt="Research Illustration">
+  </div>
+</section>
+
+<!-- About Me -->
+<section id="about">
+  <h2>About Me</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="coding-icon.svg" alt="Coding">
+      <h3>Coding Passion</h3>
+      <p>Started coding during the pandemic on my father’s phone and explored multiple computational tools.</p>
+    </div>
+    <div class="card">
+      <img src="science-icon.svg" alt="Science">
+      <h3>Research Enthusiast</h3>
+      <p>Exploring biology, chemistry, and physics through computational modeling and experiments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- My Journey -->
+<section id="journey">
+  <h2>My Research Journey</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="lab-icon.svg" alt="Labs">
+      <h3>Labs Explored</h3>
+      <p>Step by step exploration of labs and research facilities to learn real-world concepts.</p>
+    </div>
+    <div class="card">
+      <img src="paper-icon.svg" alt="Papers">
+      <h3>Papers Read</h3>
+      <p>Analyzing research journals and papers to understand insights and methods.</p>
+    </div>
+    <div class="card">
+      <img src="mvp-icon.svg" alt="MVP">
+      <h3>MVPs Built</h3>
+      <p>Creating simulations and visualizations to implement what I learn practically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Labs -->
+<section id="labs">
+  <h2>Labs I am Inspired By</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="boekhoven-icon.svg" alt="Boekhoven Lab">
+      <h3>Boekhoven Lab</h3>
+      <p>Synthetic life and chemically fueled self-assembly research.</p>
+    </div>
+    <div class="card">
+      <img src="zwicker-icon.svg" alt="Zwicker Group">
+      <h3>Zwicker Group</h3>
+      <p>Biomolecular condensates and theoretical biophysics research.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MVP / Simulation -->
+<section id="mvp">
+  <h2>MVP / Simulation</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="simulation-tool.svg" alt="MVP Tool">
+      <h3>System Simplified</h3>
+      <p>A visualization tool demonstrating OS concepts and molecular self-assembly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reflection -->
+<section id="reflection">
+  <h2>Reflection</h2>
+  <p>My journey taught me that curiosity, adaptability, and self-learning are the foundation of research. This notebook represents my first step into research.</p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 My Research Notebook | Built with ❤️ by a curious BCA student</p>
+  <p>Email: yourname@example.com | GitHub: <a href="#">@YourGitHub</a></p>
+</footer>
+
+<!-- Scripts -->
+<script>
+const menuToggle = document.getElementById('menu-toggle');
+const navbar = document.getElementById('navbar');
+menuToggle.addEventListener('click', () => { navbar.classList.toggle('active'); });
+
+// Typing animation
+const words = ["Explore my Notes", "Explore my Papers", "Explore my Simulations", "Explore my MVPs"];
+let i = 0, j = 0, currentWord = '', isDeleting = false;
+const typingSpeed = 100, deletingSpeed = 50, delayBetweenWords = 1500;
+function type() {
+  const tagline = document.getElementById('typing-line');
+  if (i >= words.length) i = 0;
+  const fullWord = words[i];
+  if (!isDeleting && j <= fullWord.length) {
+    currentWord = fullWord.substring(0, j++);
+    tagline.innerHTML = currentWord + '<span style="border-right:2px solid #3b3b98;"></span>';
+    setTimeout(type, typingSpeed);
+  } else if (isDeleting && j >= 0) {
+    currentWord = fullWord.substring(0, j--);
+    tagline.innerHTML = currentWord + '<span style="border-right:2px solid #3b3b98;"></span>';
+    setTimeout(type, deletingSpeed);
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) i++;
+    setTimeout(type, delayBetweenWords);
+  }
+}
+document.addEventListener("DOMContentLoaded", () => { type(); });
+</script>
+
+</body>
+</html>

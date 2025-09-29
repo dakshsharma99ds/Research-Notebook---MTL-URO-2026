@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Research Journey - System Simplified</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      background-color: #333;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    section {
+      padding: 3rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #4a90e2;
+    }
+
+    .timeline-step {
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      border-left: 4px solid #4a90e2;
+    }
+
+    .timeline-step h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-step p {
+      margin-bottom: 0.5rem;
+    }
+
+    .lab-box {
+      border: 2px solid #4a90e2;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: #fff;
+    }
+
+    .mvp-box {
+      background-color: #eaf4ff;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #333;
+      color: white;
+      margin-top: 3rem;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #4a90e2;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 0.5rem;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      h2 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>My Research Journey</h1>
+    <p>From self-taught coding to exploring synthetic life and biomolecular simulations</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#timeline">Journey</a>
+    <a href="#labs">Labs</a>
+    <a href="#mvp">MVP / Simulation</a>
+    <a href="#reflection">Reflection</a>
+  </nav>
+
+  <!-- About Me -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hi! I’m a 19-year-old 2nd-year Bachelor of Computer Applications student from India. I started coding on my father’s phone during the pandemic and have since been exploring how computational tools can help understand life sciences, chemistry, and physics. This website documents my first step into research — my journey, learnings, and projects.</p>
+    <p>My goal: To combine programming skills with scientific research, explore synthetic life, biomolecular transport, and pattern formation, and build tools that help students visualize complex concepts.</p>
+  </section>
+
+  <!-- Timeline / Journey -->
+  <section id="timeline">
+    <h2>Research Journey</h2>
+
+    <div class="timeline-step">
+      <h3>Step 1: Curiosity & Exploration</h3>
+      <p>I started asking fundamental questions: What is life? How does it emerge? Can we synthesize it? This led me to follow science news, research articles, and labs working on synthetic biology.</p>
+      <p><em>Visual idea:</em> mind maps or doodles of questions and labs explored.</p>
+    </div>
+
+    <div class="timeline-step">
+      <h3>Step 2: Finding Labs & Reading Papers</h3>
+      <p>I explored labs like:</p>
+      <ul>
+        <li><strong>Boekhoven Lab</strong> – Synthetic life, chemically fueled self-assembly, fuel-dependent droplets</li>
+        <li><strong>Zwicker Group</strong> – Biomolecular condensates, droplets in cells, theoretical biophysics simulations</li>
+      </ul>
+      <p>I read papers, made notes, summarized findings, and visualized concepts in my own way.</p>
+    </div>
+
+    <div class="timeline-step">
+      <h3>Step 3: Learning Tools & Programming</h3>
+      <p>I started using Python, AI tools, and frontend development to build simulations and visualization tools that help me understand molecular self-assembly and pattern formation.</p>
+    </div>
+
+    <div class="timeline-step">
+      <h3>Step 4: Connecting Skills to Labs</h3>
+      <p>I identified how my coding skills could contribute:</p>
+      <ul>
+        <li>Boekhoven Lab – simulate fuel-driven droplets and self-assembly dynamics</li>
+        <li>Zwicker Group – simulate biomolecular condensates, phase separation, and droplet regulation</li>
+      </ul>
+    </div>
+
+    <div class="timeline-step">
+      <h3>Step 5: Building MVP / Simulation</h3>
+      <div class="mvp-box">
+        <p><strong>Project:</strong> System Simplified</p>
+        <p>Visualizes operating system concepts like CPU scheduling and molecular self-assembly.</p>
+        <p>Goal: Help beginners visualize abstract concepts and connect them to real research.</p>
+        <a href="#" class="button">View MVP Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Labs -->
+  <section id="labs">
+    <h2>Labs I am Inspired By</h2>
+
+    <div class="lab-box">
+      <h3>Boekhoven Lab – Technical University of Munich</h3>
+      <p>Focus: Synthesis of Life, chemically fueled self-assembly, fuel-dependent synthetic cells</p>
+      <p>Interest: Simulate droplet formation, visualize self-assembly dynamics, understand minimal principles of life</p>
+    </div>
+
+    <div class="lab-box">
+      <h3>Zwicker Group – MPI Göttingen</h3>
+      <p>Focus: Theoretical Biophysics, biomolecular condensates, phase separation</p>
+      <p>Interest: Model condensate dynamics, create digital visualization tools, connect theory and computation</p>
+    </div>
+  </section>
+
+  <!-- Reflection -->
+  <section id="reflection">
+    <h2>Reflection & Next Steps</h2>
+    <p>Through this journey, I have learned:</p>
+    <ul>
+      <li>Curiosity is key — asking questions and exploring papers opens doors.</li>
+      <li>Programming and visualization can bridge the gap between computation and life sciences.</li>
+      <li>Even without formal experience, one can create opportunities, build MVPs, and begin contributing.</li>
+    </ul>
+    <p>Next steps: Expand simulations, explore more life-science research papers, connect with professors, and document everything visually.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 My Research Notebook | Built with ❤️ by a curious BCA student</p>
+    <p>Email: yourname@example.com | GitHub: <a href="#" style="color:white;">@YourGitHub</a></p>
+  </footer>
+
+</body>
+</html>

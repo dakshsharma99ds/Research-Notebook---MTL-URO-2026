@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Notebook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- p5.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js" integrity="sha256-8IAwtdm0tRSYpMA1G5K1jpeHZq1N02yrdpoBteVVuMc=" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & BODY */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f6f9fc;
+      color: #102045;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #406ed8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 25px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;       
+      z-index: 100;  
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.25rem;
+      gap: 8px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      flex-wrap: wrap;
+      transition: all 0.3s ease;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #7de0f8;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 22px;
+      cursor: pointer;
+    }
+    .hamburger div {
+      height: 3px;
+      background: #fff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px,5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(6px,-6px);
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      background: linear-gradient(135deg,#0b2271 75%,#b3e8ff 110%);
+      color: #fff;
+      padding: 50px 20px 60px 20px;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+    .hero-left {
+      flex: 1;
+      min-width: 280px;
+      max-width: 700px;
+      padding-left: 40px;
+      margin-top: 18px;
+      padding-right: 20px;
+    }
+    .hero-left h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #d5ebf6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #ffce00;
+      color: #102045;
+      text-align: center;
+      text-decoration: none;
+    }
+    .hero-btn:hover {
+      background: #ffd633;
+      transform: translateY(-2px);
+    }
+    .hero-right {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding-right: 40px;
+      padding-left: 20px;
+    }
+    .hero-virus {
+      width: 100%;
+      max-width: 600px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* HERO ICONS */
+    .hero-icon {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .hero-icon img {
+      width: 70px;
+      min-width: 50px;
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.95rem;
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 4rem 2rem;
+      background-color: #dce9f8;
+      gap: 2rem;
+      border-radius: 20px;
+      max-width: 1400px;
+      flex-wrap: wrap;
+      margin: 40px auto;
+    }
+    .about-video {
+      flex: 1;
+      min-width: 280px;
+    }
+    .about-video video {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .about-text {
+      flex: 1;
+      min-width: 280px;
+      text-align: left;
+    }
+    .about-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .about-title::after {
+      content: "";
+      display: block;
+      width: 150px;
+      height: 4px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg,#74b9ff,#a29bfe);
+      border-radius: 2px;
+    }
+    .about-intro {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      font-style: italic;
+      margin: 1.5rem 0;
+      padding-left: 1rem;
+      border-left: 4px solid #555;
+      color: #555;
+    }
+    .about-quote {
+      font-weight: bold;
+      color: #102045;
+      background-color: #c8e6c9;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 2rem;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* LABS */
+    .lab-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .lab-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1a73e8;
+      font-size: 2.5rem;
+    }
+    .labs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .lab-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .lab-card h3 {
+      color: #1a73e8;
+      margin-bottom: 0.5rem;
+    }
+    .lab-card canvas {
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+      display: block;
+      background: #f4f6fa;
+      width: 100%;
+      height: auto;
+    }
+    .lab-card button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #ffce00;
+      color: #102045;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .lab-card button:hover { background: #ffd633; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #0b2271;
+      color: white;
+    }
+    footer a { color: white; text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media(min-width:1000px){
+      .hero-left{ padding-left:50px; }
+      .hero-virus{ min-width:450px;}
+      .hero-icon img{ width:140px;}
+    }
+    @media(max-width:1080px){
+      .hero-left h1{ font-size:2.4rem; }
+      .hero-desc{ font-size:1.1rem; }
+      .hero-virus{ max-width:400px; margin-top:20px; }
+      
+    }
+    @media(max-width:768px){
+      .hamburger{ display:flex; }
+      .nav-links{
+        position:absolute;
+        top:60px;
+        left:0;
+        right:0;
+        background:#406ed8;
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+        padding:15px 0;
+        display:none;
+      }
+      .nav-links.show{ display:flex; }
+      .hero{ flex-direction:column; text-align:center; }
+      .hero-left,.hero-right{ max-width:100%; padding:10px; }
+      .hero-buttons{ justify-content:center; }
+      .about-section{ flex-direction:column; text-align:center; }
+      .about-text{text-align:center;}
+      .about-video video{max-width:90%;}
+      .hero-icon{justify-content:center;}
+    }
+    @media(max-width:480px){
+      .hero-left h1{ font-size:1.8rem; }
+      .hero-desc{ font-size:1rem; }
+      .hero-buttons{ flex-direction:column; gap:10px; }
+      .hero-virus{ max-width:280px; }
+      .lab-card{ padding:1rem; }
+    }
+    @media(max-width:360px){
+      .hero-left h1{ font-size:1.5rem; }
+      .hero-desc{ font-size:0.9rem; }
+      .hero-buttons{ gap:8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="nav-left">
+      <img src="image.png" alt="Logo" style="width:50px;height:50px;">
+      <span>Research Notebook</span>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="/main.html">Home</a></li>
+      <li><a href="#about-section">About Website</a></li>
+      <li><a href="/simulator.html">Play with models</a></li>
+      <li><a href="/researchpaper.html" class="nav-btn-small">My Research</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Welcome to my research<br>laboratory center</h1>
+      <p class="hero-desc">
+        Advancing knowledge through research, where groundbreaking research meets practical applications.
+      </p>
+      <div class="hero-buttons">
+        <a href="#labs" class="hero-btn">My Research</a>
+        <a href="#about-section" class="hero-btn">About Me</a>
+      </div>
+      <div class="hero-icon">
+        <img src="https://img.icons8.com/fluency/256/virus.png" alt="Virus Icon">
+        <div class="hero-stats">
+          <span>Matter to Life (URO Program 2026)</span>
+          <span>Inspired By</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-virus" src="\Medical research-cuate.svg" alt="Hero Image">
+    </div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section" id="about-section">
+    <div class="about-video">
+      <video autoplay muted loop playsinline>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align: center; font-size: 1.3rem; color: #555; font-style: italic;">The curiousity here is just like me😂</p>
+    </div>
+    <div class="about-text">
+      <h1 class="about-title">About This Website</h1>
+      <p class="about-intro">
+        This <strong>Research Notebook</strong> is more than just a website, it’s my personal space for exploration and my first step into the world of research.<br><br>
+        Coming from a <strong>non–life sciences background</strong>, I wanted to challenge myself:
+        could I contribute to the <strong>Matter to Life URO Program</strong> even in a short time, 
+        with nothing but curiosity, persistence, and computational skills?
+      </p>
+      <p>
+        I built this space as a <em>living demo</em> of my curious mindset.  
+        Every section, from visualizations to simulations, is my way of asking questions and 
+        translating them into interactive forms.
+      </p>
+      <blockquote>“I didn’t wait to be ready. I became ready by building.”</blockquote>
+      <p> In only a few days, I learned research tools, coded models, and designed this notebook to prove one thing: <strong>curiosity becomes contribution when acted upon</strong>. This website is my bridge from computer science into the unknown world of Life sciences, and toward the <strong>Matter to Life vision</strong>. </p>
+      <p class="about-quote">“This is my way of showing — I’m not just applying, I’m already contributing.”</p>
+    </div>
+  </section>
+
+  <!-- LABS SECTION -->
+  <section class="lab-section" id="labs">
+    <h2>Featured Labs & Visualizations</h2>
+    <div class="labs">
+      <!-- Boekhoven Lab -->
+      <div class="lab-card">
+        <h3>Boekhoven Lab – Chemical Network Simulation</h3>
+        <p><strong>Tools:</strong> Python, Numpy, Matplotlib</p>
+        <p><strong>Objective:</strong> Explore dynamics of a simple chemical network (A → B → C)</p>
+        <canvas id="boekhovenCanvas" width="300" height="200"></canvas>
+        <p><strong>Observation:</strong> B peaks sooner; C forms earlier.</p>
+        <button onclick="window.location.href='boekhoven.html'">View Full Research</button>
+      </div>
+
+      <!-- Sarah Loss Lab -->
+      <div class="lab-card">
+        <h3>Sarah Loss Lab – Self-Organization Simulation</h3>
+        <p><strong>Tools:</strong> Python, Matplotlib, py-pde</p>
+        <p><strong>Objective:</strong> Visualize how simple local rules generate complex patterns in 2D</p>
+        <canvas id="sarahCanvas" width="300" height="200"></canvas>
+        <p><strong>Observation:</strong> Patterns emerge from local rules.</p>
+        <button onclick="window.location.href='sarah.html'">View Full Research</button>
+      </div>
+
+      <!-- Zwicker Lab -->
+      <div class="lab-card">
+        <h3>Zwicker Lab – Diffusion Simulation</h3>
+        <p><strong>Tools:</strong> Python, Matplotlib, py-pde</p>
+        <p><strong>Objective:</strong> Simulate diffusion in 1D and 2D</p>
+        <canvas id="zwickerCanvas" width="300" height="200"></canvas>
+        <p><strong>Observation:</strong> Spike spreads gradually; toggle between 1D & 2D diffusion.</p>
+        <button id="toggleZwicker">Toggle 1D / 2D</button>
+        <button onclick="window.location.href='zwicker.html'">View Full Research</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 My Research Notebook | Built with ❤️ by a curious BCA student</p>
+    <p>Email: <a href="mailto:salonij703@gmail.com">salonij703@gmail.com</a> | GitHub: <a href="#">@YourGitHub</a></p>
+  </footer>
+
+  <script>
+    // Navbar Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('show'); 
+      hamburger.classList.toggle('active');
+    });
+    window.addEventListener('click', function(e){
+      if(!hamburger.contains(e.target)&&!navMenu.contains(e.target)){
+        navMenu.classList.remove('show');
+        hamburger.classList.remove('active');
+      }
+    });
+
+    // Boekhoven Lab Animation
+    const bCanvas = document.getElementById('boekhovenCanvas');
+    const bCtx = bCanvas.getContext('2d');
+    let bars = [{x:30,y:150,height:50},{x:90,y:150,height:50},{x:150,y:150,height:50}];
+    function drawBoekhoven(){
+      bCtx.clearRect(0,0,bCanvas.width,bCanvas.height);
+      bars.forEach((bar,i)=>{
+        bCtx.fillStyle=['#ff3d00','#ff9800','#ffc107'][i];
+        bCtx.fillRect(bar.x,bar.y-bar.height,40,bar.height);
+        bar.height = 50 + 30 * Math.sin(Date.now()/500 + i);
+      });
+      requestAnimationFrame(drawBoekhoven);
+    }
+    drawBoekhoven();
+
+    // Sarah Loss Lab Animation
+    const sCanvas = document.getElementById('sarahCanvas');
+    const sCtx = sCanvas.getContext('2d');
+    const sParticles = [];
+    for(let i=0;i<50;i++){
+      sParticles.push({x:Math.random()*300,y:Math.random()*200,dx:Math.random()*2-1,dy:Math.random()*2-1,r:4+Math.random()*3});
+    }
+    function drawSarah(){
+      sCtx.fillStyle='rgba(255,255,255,0.1)';
+      sCtx.fillRect(0,0,300,200);
+      sParticles.forEach(p=>{
+        sCtx.fillStyle='#e91e63';
+        sCtx.beginPath();
+        sCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        sCtx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if(p.x>300||p.x<0)p.dx*=-1;
+        if(p.y>200||p.y<0)p.dy*=-1;
+      });
+      requestAnimationFrame(drawSarah);
+    }
+    drawSarah();
+
+    // Zwicker Lab Animation
+    const zCanvas = document.getElementById('zwickerCanvas');
+    const zCtx = zCanvas.getContext('2d');
+    let zw1D = true;
+    const zw1DX = Array(5).fill(0).map((_,i)=>i*50+30); 
+    const zw1DY = 100;
+    const zw2DParticles = [];
+    for(let i=0;i<20;i++){
+      zw2DParticles.push({x:150,y:100,r:5+Math.random()*5,dx:Math.random()*2-1,dy:Math.random()*2-1});
+    }
+    document.getElementById('toggleZwicker').addEventListener('click',()=>{ zw1D=!zw1D; });
+    function drawZwicker(){
+      zCtx.clearRect(0,0,300,200);
+      if(zw1D){
+        zCtx.fillStyle='#ff9800';
+        zw1DX.forEach((x,i)=>{ zCtx.fillRect((x+Date.now()/50)%300,zw1DY,20,20); });
+      } else {
+        zCtx.fillStyle='#4caf50';
+        zw2DParticles.forEach(p=>{
+          zCtx.beginPath(); zCtx.arc(p.x,p.y,p.r,0,Math.PI*2); zCtx.fill();
+          p.x+=p.dx; p.y+=p.dy;
+          if(p.x>300||p.x<0)p.dx*=-1; if(p.y>200||p.y<0)p.dy*=-1;
+        });
+      }
+      requestAnimationFrame(drawZwicker);
+    }
+    drawZwicker();
+  </script>
+
+</body>
+</html>

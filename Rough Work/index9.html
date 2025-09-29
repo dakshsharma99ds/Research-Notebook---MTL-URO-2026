@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Portfolio</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: #1e40af;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #dbeafe;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: #2563eb;
+      padding: 12px 0;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #facc15;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 50px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #2563eb;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* About Me */
+    .about {
+      background: #e0f2fe;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .about p {
+      font-size: 1.05rem;
+      margin-top: 10px;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .project-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card h3 {
+      color: #1e3a8a;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    .project-card p {
+      margin: 5px 0;
+    }
+
+    /* Collapsible code block */
+    .code-toggle {
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      font-family: monospace;
+      color: #1f2937;
+      overflow-x: auto;
+    }
+
+    .code-content {
+      display: none;
+      margin-top: 10px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+
+    .project-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 10px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .observation, .future-work {
+      background: #fef3c7;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    /* Contact */
+    .contact p {
+      margin: 10px 0;
+    }
+
+    .contact a {
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px){
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>My Research Portfolio</h1>
+    <p>Exploring Computational Biology & Self-Organization</p>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- About Me -->
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <p>
+        I am a computational biology enthusiast exploring chemical networks, diffusion dynamics, and self-organization. 
+        My goal is to learn, adapt, and contribute to labs like Boekhoven, Zwicker, and Sarah Loss by building simulations, 
+        visualizations, and self-driven experiments that demonstrate understanding and practical application.
+      </p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <!-- Project 1: Chemical Reaction Network -->
+        <div class="project-card">
+          <h3>Chemical Reaction Network Simulation – Boekhoven Lab</h3>
+          <p><strong>Tools:</strong> Python, Numpy, Matplotlib</p>
+          <p><strong>Objective:</strong> Explore dynamics of a simple chemical network (A → B → C).</p>
+
+          <div class="code-toggle">Show/Hide Code</div>
+          <pre class="code-content">
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0, 10, 100)
+A = np.exp(-0.5*t)
+B = 0.7*(1 - np.exp(-0.3*t))
+C = 1 - A - B
+
+plt.plot(t,A,label='A')
+plt.plot(t,B,label='B')
+plt.plot(t,C,label='C')
+plt.xlabel('Time'); plt.ylabel('Concentration')
+plt.title('Chemical Reaction Network Simulation')
+plt.legend(); plt.show()
+          </pre>
+
+          <img src="chemical_network_plot.png" alt="Chemical Network Plot">
+          <div class="observation">
+            <strong>Observation:</strong> Increasing the reaction rate of A → B causes B to peak sooner and C forms earlier. Demonstrates chemical network dynamics.
+          </div>
+          <div class="future-work">
+            <strong>Future Work:</strong> Test different network topologies and rate constants to see emergent behaviors.
+          </div>
+        </div>
+
+        <!-- Project 2: Self-Organization -->
+        <div class="project-card">
+          <h3>Self-Organization Simulation – Sarah Loss Lab / MPI-DS</h3>
+          <p><strong>Tools:</strong> Python, Matplotlib, py-pde</p>
+          <p><strong>Objective:</strong> Visualize how simple local rules generate complex patterns in a 2D system.</p>
+
+          <div class="code-toggle">Show/Hide Code</div>
+          <pre class="code-content">
+import numpy as np
+import matplotlib.pyplot as plt
+from pde import ScalarField, ReactionDiffusionPDE, UnitGrid
+
+grid = UnitGrid([50,50], periodic=True)
+state = ScalarField(grid, np.random.rand(grid.size))
+eq = ReactionDiffusionPDE(a=0.1, b=0.05, D=0.1)
+
+snapshots = []
+current_state = state.copy()
+for i in range(0,51,10):
+    result = eq.solve(current_state, t_range=10, dt=0.1, tracker=None)
+    snapshots.append(result.data.copy())
+    current_state = result
+
+plt.imshow(snapshots[-1].reshape(grid.shape), origin='lower', cmap='plasma')
+plt.show()
+          </pre>
+
+          <img src="self_organization_patterns.png" alt="Self-Organization Patterns Plot">
+          <div class="observation">
+            <strong>Observation:</strong> Random fluctuations evolve into distinct patterns over time, showing how local rules create global structure.
+          </div>
+          <div class="future-work">
+            <strong>Future Work:</strong> Explore parameter changes and initial conditions to study emergent pattern diversity.
+          </div>
+        </div>
+
+        <!-- Project 3: 1D Diffusion -->
+        <div class="project-card">
+          <h3>1D Diffusion – Zwicker Lab</h3>
+          <p><strong>Tools:</strong> Python, Matplotlib, py-pde</p>
+          <p><strong>Objective:</strong> Simulate how a concentration spike spreads over time in 1D.</p>
+
+          <div class="code-toggle">Show/Hide Code</div>
+          <pre class="code-content">
+import numpy as np
+import matplotlib.pyplot as plt
+from pde import ScalarField, DiffusionPDE, UnitGrid
+
+grid = UnitGrid([100], periodic=False)
+x = grid.cell_coords[:,0]
+state = ScalarField(grid, np.exp(-100*(x-0.5)**2))
+eq = DiffusionPDE(diffusivity=0.01)
+snapshots = []
+current_state = state.copy()
+for i in range(0,51,10):
+    result = eq.solve(current_state, t_range=10, dt=0.1, tracker=None)
+    snapshots.append(result.data.copy())
+    current_state = result
+
+plt.plot(x,snapshots[-1])
+plt.show()
+          </pre>
+
+          <img src="zwicker_diffusion_1D_evolution.png" alt="1D Diffusion Plot">
+          <div class="observation">
+            <strong>Observation:</strong> Spike spreads gradually along 1D line, demonstrating diffusion dynamics.
+          </div>
+          <div class="future-work">
+            <strong>Future Work:</strong> Explore effects of boundary conditions and diffusion constants.
+          </div>
+        </div>
+
+        <!-- Project 4: 2D Diffusion -->
+        <div class="project-card">
+          <h3>2D Diffusion – Zwicker Lab</h3>
+          <p><strong>Tools:</strong> Python, Matplotlib, py-pde</p>
+          <p><strong>Objective:</strong> Simulate concentration spreading across a 2D grid.</p>
+
+          <div class="code-toggle">Show/Hide Code</div>
+          <pre class="code-content">
+import matplotlib.pyplot as plt
+from pde import ScalarField, DiffusionPDE, UnitGrid
+
+grid = UnitGrid([10,10], periodic=False)
+state = ScalarField(grid); state.data[:] = 0
+center_index = len(state.data)//2
+state.data[center_index] = 1
+eq = DiffusionPDE(diffusivity=0.1)
+result = eq.solve(state, t_range=5, dt=0.1)
+plt.imshow(result.data.reshape(grid.shape), origin='lower', cmap='viridis'); plt.show()
+          </pre>
+
+          <img src="zwicker_diffusion_2D_evolution.png" alt="2D Diffusion Plot">
+          <div class="observation">
+            <strong>Observation:</strong> Spike spreads outward smoothly, visualizing 2D diffusion dynamics.
+          </div>
+          <div class="future-work">
+            <strong>Future Work:</strong> Test different grid sizes and diffusivities for pattern evolution.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Email: your.email@example.com</p>
+      <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+    </section>
+
+  </div>
+
+  <footer style="text-align:center; padding:20px; background:#1e40af; color:#fff;">
+    &copy; 2025 My Research Portfolio
+  </footer>
+
+  <script>
+    const toggles = document.querySelectorAll('.code-toggle');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+
+</body>
+</html>

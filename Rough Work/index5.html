@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Notebook</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --lavender: #a37dce;
+  --blossom: #f6c1c7;
+  --mint: #b2e0d2;
+  --text-dark: #2d2d2d;
+  --text-soft: #555;
+  --bg-light: #fafafa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+header .logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--lavender);
+  font-weight: bold;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+nav ul li a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+nav ul li a:hover {
+  color: var(--lavender);
+}
+
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--lavender);
+}
+
+/* Hero */
+.hero {
+  padding: 6rem 2rem 4rem;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: var(--bg-light);
+}
+.hero-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.hero-text {
+  flex: 1 1 500px;
+}
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--lavender);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.hero-text p {
+  font-size: 1.2rem;
+  color: var(--text-soft);
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+.hero-text button {
+  padding: 0.8rem 1.5rem;
+  background: var(--lavender);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.hero-text button:hover {
+  transform: scale(1.05);
+  background: var(--blossom);
+}
+.hero-image {
+  flex: 1 1 500px;
+  text-align: center;
+}
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Sections */
+section {
+  padding: 5rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--lavender);
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+section h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: var(--blossom);
+  display: block;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card h3 {
+  color: var(--lavender);
+  margin-bottom: 0.5rem;
+}
+.card p {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+
+/* Contact */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: auto;
+}
+form input, form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+form button {
+  background: var(--mint);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 25px;
+  color: var(--text-dark);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+form button:hover {
+  background: var(--lavender);
+  color: white;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive */
+@media(max-width: 992px) {
+  .hero-container { gap: 2rem; }
+}
+@media(max-width: 768px) {
+  .hero {
+    padding: 5rem 1.5rem 3rem;
+  }
+  .hero-container {
+    flex-direction: column; /* stack text & image vertically */
+    text-align: center;
+  }
+  .hero-text, .hero-image { 
+    flex: 1 1 100%;
+    margin: 0; /* remove extra spacing */
+  }
+  .hero-text h1 { font-size: 2.2rem; line-height: 1.3; }
+  .hero-text p { max-width: 100%; margin: 1rem auto; }
+  .hero-image img { 
+    max-width: 80%; 
+    height: auto; 
+    margin: 1.5rem auto 0; 
+    display: block; 
+  }
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  nav ul.active { display: flex; }
+  .menu-toggle { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+  <div class="logo"><i class="fas fa-microscope"></i> Research Notebook</div>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#labs">Labs</a></li>
+      <li><a href="#opportunities">Opportunities</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Welcome To My Journey of Research</h1>
+      <p>A journey of curiosity, labs, and opportunities — making science understandable for everyone.</p>
+      <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});">Explore</button>
+    </div>
+    <div class="hero-image">
+      <img src="Medical research-cuate.svg" alt="Research Illustration">
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h2>About Me</h2>
+  <p>Hello! I’m [Your Name], an aspiring researcher. I started my journey with curiosity about how life works at the smallest scales. This notebook is my way of sharing science in a simple, elegant, and inspiring way.</p>
+</section>
+
+<!-- Journey -->
+<section id="journey">
+  <h2>My Research Journey</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>How I Got Interested</h3>
+      <p>From early fascination with science experiments, I discovered the world of research and its beauty.</p>
+    </div>
+    <div class="card">
+      <h3>Starting Out</h3>
+      <p>Joining projects and exploring opportunities like the Matter to Life URO program inspired me further.</p>
+    </div>
+    <div class="card">
+      <h3>Future Vision</h3>
+      <p>To contribute meaningfully in labs and share my learnings with students worldwide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Labs -->
+<section id="labs">
+  <h2>Labs & Research Focus</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Zacharias Lab</h3>
+      <p>Focused on DNA blunt end stacking and understanding molecular interactions for real-world applications in medicine.</p>
+    </div>
+    <div class="card">
+      <h3>Other Labs</h3>
+      <p>Exploring labs in computational biology, biophysics, and AI-driven research.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Opportunities -->
+<section id="opportunities">
+  <h2>Opportunities & Programs</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Matter to Life URO</h3>
+      <p>An inspiring program where I aim to learn how life emerges from molecules and how research can shape our understanding.</p>
+    </div>
+    <div class="card">
+      <h3>Future Programs</h3>
+      <p>Looking forward to engaging with other international research internships and collaborations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message"></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<script>
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector("nav ul");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+</script>
+
+</body>
+</html>

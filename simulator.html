@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Droplet Simulation - Smooth Plant Analogy</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+/* Base Styles */
+body { font-family: Arial,sans-serif; margin:0; padding:0; background:#f0f8ff; color:#333; }
+header { background:#406ed8; color:white; text-align:center; padding:1rem; }
+.container { display:flex; flex-wrap:wrap; padding:2rem; max-width:1200px; margin:auto; gap:2rem; }
+.left { flex:1 1 350px; min-width:300px; }
+.right { flex:1 1 600px; min-width:300px; display:flex; flex-direction:column; gap:1rem; }
+.notes { background:white; padding:1rem; border-left:4px solid #406ed8; font-size:1rem; line-height:1.5; min-height:300px; }
+.canvas-container { width:100%; background:white; border:1px solid #ccc; padding:10px; border-radius:5px; box-sizing:border-box; }
+canvas { display:block; width:100%; height:350px; }
+.droplet-container { position:relative; width:100%; height:400px; background:#d0f0fd; border:1px solid #ccc; overflow:hidden; border-radius:5px; margin-top:10px;}
+.droplet { position:absolute; border-radius:50%; opacity:0.8; display:flex; align-items:center; justify-content:center; color:white; font-size:10px; font-weight:bold; text-align:center; pointer-events:none; will-change: transform, width, height;}
+button { margin-top:1rem; padding:0.5rem 1rem; background:#406ed8; color:white; border:none; cursor:pointer; font-size:1rem; border-radius:5px; margin-right:0.5rem; }
+label { display:block; margin-top:1rem; font-weight:bold; }
+input[type="range"] { width:100%; }
+
+/* Slider scale numbers */
+.slider-scale { display:flex; justify-content:space-between; font-size:0.9rem; margin-top:2px; }
+
+/* Slider thumb style */
+input[type=range]::-webkit-slider-runnable-track { height: 8px; background: #ddd; border-radius: 5px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; background: #406ed8; border-radius: 50%; cursor: pointer; margin-top: -6px; }
+input[type=range]:focus { outline: none; }
+
+/* Advanced info box style */
+#advancedInfoBox { background: #e0f0ff; padding: 10px; border: 1px solid #406ed8; border-radius: 5px; margin-top:1rem; font-size:0.9rem; }
+
+/* Responsive Media Queries */
+
+/* Medium screens (tablets) */
+@media (max-width: 992px) {
+  .container { flex-direction: column; padding:1rem; }
+  .left, .right { flex:1 1 100%; }
+  .droplet-container { height:350px; }
+  canvas { height:300px; }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 768px) {
+  .notes { font-size:0.95rem; }
+  button { font-size:0.9rem; padding:0.4rem 0.8rem; }
+  canvas { height:250px; }
+  .droplet-container { height:300px; }
+}
+
+/* Very small screens (phones) */
+@media (max-width: 480px) {
+  header h1 { font-size:1.2rem; }
+  header p { font-size:0.9rem; }
+  .notes { font-size:0.9rem; }
+  button { font-size:0.85rem; padding:0.35rem 0.7rem; }
+  canvas { height:200px; }
+  .droplet-container { height:250px; }
+  #advancedInfoBox { font-size:0.85rem; padding:8px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Droplet Simulation - Smooth Plant Analogy</h1>
+<p>Left = Explanation | Right = Chart + Droplets side by side</p>
+</header>
+
+<div class="container">
+  <div class="left">
+    <div class="notes" id="explanation"></div>
+    <div style="margin-top:1rem;">
+      <button id="prevBtn">Previous Step</button>
+      <button id="nextBtn">Next Step</button>
+    </div>
+
+    <!-- Advanced Mode Info Box -->
+    <div id="advancedInfoBox">
+      <strong>Advanced Info:</strong>
+      <div id="advancedInfo"></div>
+    </div>
+
+    <!-- Fuel Slider -->
+    <label for="fuelSlider">Fuel Level: <span id="fuelValue">50</span></label>
+    <input type="range" id="fuelSlider" min="0" max="100" value="50">
+    <div class="slider-scale"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+
+    <!-- k1 Slider -->
+    <label for="k1Slider">k1 (A→B rate): <span id="k1Value">0.05</span></label>
+    <input type="range" id="k1Slider" min="0.01" max="0.2" step="0.01" value="0.05">
+    <div class="slider-scale"><span>0.01</span><span>0.05</span><span>0.10</span><span>0.15</span><span>0.20</span></div>
+
+    <!-- k2 Slider -->
+    <label for="k2Slider">k2 (B→C rate): <span id="k2Value">0.03</span></label>
+    <input type="range" id="k2Slider" min="0.01" max="0.2" step="0.01" value="0.03">
+    <div class="slider-scale"><span>0.01</span><span>0.05</span><span>0.10</span><span>0.15</span><span>0.20</span></div>
+  </div>
+
+  <div class="right">
+    <div class="canvas-container">
+      <canvas id="reactionChart"></canvas>
+    </div>
+    <div class="droplet-container" id="dropletContainer"></div>
+  </div>
+</div>
+
+<script>
+// --- Molecules & Chart ---
+let A=100, B=0, C=0, dt=0.1;
+const timeData=[], Adata=[], Bdata=[], Cdata=[];
+const ctx = document.getElementById('reactionChart').getContext('2d');
+const chart = new Chart(ctx,{
+    type:'line',
+    data:{ labels:timeData, datasets:[
+        {label:'A (Seed🌱)', data:Adata, borderColor:'red', fill:false},
+        {label:'B (Sprout🌿)', data:Bdata, borderColor:'orange', fill:false},
+        {label:'C (Fruit🍎)', data:Cdata, borderColor:'blue', fill:false}
+    ]},
+    options:{ responsive:true, scales:{ x:{title:{display:true,text:'Time'}}, y:{title:{display:true,text:'Amount'}}}, animation:{duration:0} }
+});
+
+// --- Droplets ---
+const container = document.getElementById('dropletContainer');
+const droplets = [];
+function createDroplet(parent=null){
+    const d=document.createElement('div');
+    d.className='droplet';
+    d.size = parent ? parent.size/2 : 20 + Math.random()*15;
+    d.style.width=d.style.height=d.size+'px';
+    d.style.backgroundColor = parent ? parent.style.backgroundColor : `rgba(${Math.random()*200},${Math.random()*200},${Math.random()*200},0.7)`;
+    d.x = parent ? parent.x+5 : Math.random()*(container.clientWidth-d.size);
+    d.y = parent ? parent.y+5 : Math.random()*(container.clientHeight-d.size);
+    d.vx = (Math.random()-0.5)*1.5;
+    d.vy = (Math.random()-0.5)*1.5;
+    d.label = parent ? "Split!" : "New Droplet";
+    container.appendChild(d); droplets.push(d); return d;
+}
+
+// --- Steps ---
+const steps = [
+   {text:`<b>Step 0: Introduction</b>
+<ul><li>We track molecules A → B → C.</li><li>A = Seed 🌱, B = Sprout 🌿, C = Fruit 🍎.</li><li>Chart + animation show molecule changes and droplet formation.</li></ul>`},
+  {text:`<b>Step 1: Stage A – Seed</b>
+<ul><li>Red molecules = A (Seed 🌱)</li><li>Seeds slowly convert to B depending on fuel.</li><li>Only A line is visible.</li></ul>`},
+  {text:`<b>Step 2: Stage B – Sprout</b>
+<ul><li>Orange molecules = B (Sprout 🌿)</li><li>B increases as A decreases → Sprouts grow.</li><li>Both A & B lines visible; B line highlighted.</li></ul>`},
+  {text:`<b>Step 3: Stage C – Fruit / Droplets</b>
+<ul><li>Blue molecules = C (Fruit 🍎)</li><li>Droplets appear as blue bubbles.</li><li>A, B & C lines visible; C line highlighted.</li></ul>`},
+  {text:`<b>Step 4: Droplet Growth & Division</b>
+<ul><li>Droplets grow bigger as more C forms.</li><li>If too big → split into two droplets.</li><li>All lines visible; droplet animation continues.</li></ul>`}
+];
+let currentStep=0;
+const explanationDiv = document.getElementById('explanation');
+const nextBtn=document.getElementById('nextBtn'); const prevBtn=document.getElementById('prevBtn');
+explanationDiv.innerHTML = steps[currentStep].text;
+function updateStep(){
+    explanationDiv.innerHTML = steps[currentStep].text;
+    chart.data.datasets[0].hidden=currentStep<1;
+    chart.data.datasets[1].hidden=currentStep<2;
+    chart.data.datasets[2].hidden=currentStep<3;
+    chart.update();
+    if(currentStep<3){ droplets.forEach(d=>container.removeChild(d)); droplets.length=0; }
+}
+nextBtn.addEventListener('click',()=>{ currentStep=Math.min(currentStep+1,steps.length-1); updateStep(); });
+prevBtn.addEventListener('click',()=>{ currentStep=Math.max(currentStep-1,0); updateStep(); });
+
+// --- Slider Display ---
+const fuelSlider=document.getElementById('fuelSlider'), k1Slider=document.getElementById('k1Slider'), k2Slider=document.getElementById('k2Slider');
+const fuelValue=document.getElementById('fuelValue'), k1Value=document.getElementById('k1Value'), k2Value=document.getElementById('k2Value');
+fuelSlider.addEventListener('input',()=>{ fuelValue.textContent=fuelSlider.value; });
+k1Slider.addEventListener('input',()=>{ k1Value.textContent=k1Slider.value; });
+k2Slider.addEventListener('input',()=>{ k2Value.textContent=k2Slider.value; });
+
+// --- Simulation Update ---
+let t=0, frameCounter=0;
+function update(){
+    const fuel=parseFloat(fuelSlider.value);
+    const k1=parseFloat(k1Slider.value);
+    const k2=parseFloat(k2Slider.value);
+    let dA=-k1*A*(fuel/50); let dB=k1*A*(fuel/50)-k2*B; let dC=k2*B;
+    A+=dA*dt; B+=dB*dt; C+=dC*dt;
+
+    t+=dt; timeData.push(t); Adata.push(A); Bdata.push(B); Cdata.push(C);
+    if(timeData.length>100){ timeData.shift(); Adata.shift(); Bdata.shift(); Cdata.shift(); }
+    if(frameCounter%5===0) chart.update();
+
+    if(currentStep>=3 && C>20 && droplets.length<10){ createDroplet(); }
+    droplets.forEach(d=>{
+        if(currentStep>=4){ d.size+=(C-20)*0.1; if(fuel<20)d.size*=0.97; if(d.size>80){createDroplet(d); d.size/=2; d.label="Split!";} d.style.width=d.style.height=d.size+'px'; d.innerText=(C>20)?d.label:""; }
+        d.x+=d.vx; d.y+=d.vy; if(d.x<0||d.x>container.clientWidth-d.size)d.vx*=-1; if(d.y<0||d.y>container.clientHeight-d.size)d.vy*=-1;
+        d.style.transform=`translate(${d.x}px, ${d.y}px)`;
+    });
+
+    document.getElementById('advancedInfo').innerHTML=`Fuel: ${fuel}<br>A (Seed 🌱): ${A.toFixed(1)}<br>B (Sprout 🌿): ${B.toFixed(1)}<br>C (Fruit 🍎): ${C.toFixed(1)}<br>Droplets: ${droplets.length}`;
+
+    frameCounter++; requestAnimationFrame(update);
+}
+update();
+</script>
+</body>
+</html>

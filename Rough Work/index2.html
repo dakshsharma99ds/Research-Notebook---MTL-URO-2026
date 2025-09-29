@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Nanotechnology Learning Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f9fc;
+            color: #333;
+        }
+
+        /* Navbar */
+        nav {
+            background: #1a73e8;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #e8f0fe;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .section {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a73e8;
+        }
+        .section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Labs Section */
+        .labs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .lab-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .lab-card h3 {
+            color: #1a73e8;
+            margin-bottom: 0.5rem;
+        }
+        .lab-card canvas {
+            border: 1px solid #ddd;
+            margin-top: 1rem;
+            display: block;
+            background: #f4f6fa;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a73e8;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo"><strong>DNA NanoJournal</strong></div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#labs">Labs</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>DNA Nanotechnology Learning Journal</h1>
+        <p>From a non-background learner to building interactive simulations inspired by cutting-edge DNA research labs.</p>
+        <p>Built in 2 weeks to explore DNA origami, DNA-protein hybrid machines, and virus-trapping nanoshells.</p>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2>About This Website</h2>
+        <p>This website is a personal learning journal to understand and visualize DNA nanotechnology research. It helps me:</p>
+        <ul>
+            <li>Translate complex research papers into simple visualizations</li>
+            <li>Experiment with interactive simulations of molecular machines</li>
+            <li>Reflect on learning and explore real-world applications</li>
+        </ul>
+        <p>Purpose: Show initiative, curiosity, and the ability to understand advanced topics despite a non-background start.</p>
+    </section>
+
+    <!-- Labs Section -->
+    <section class="section" id="labs">
+        <h2>Featured Labs & Visualizations</h2>
+        <div class="labs">
+            <!-- Dietz Lab -->
+            <div class="lab-card">
+                <h3>Dietz Lab – DNA Origami</h3>
+                <p><strong>Goal:</strong> Design nanoscale 3D shapes using DNA folding techniques.</p>
+                <p><strong>Papers:</strong> Example: “Folding DNA into nanoscale shapes” (Science, 2009)</p>
+                <p><strong>Simulation:</strong> DNA origami folding animation</p>
+                <canvas id="dietzCanvas" width="300" height="200"></canvas>
+                <p><strong>What I learned:</strong> DNA can be folded like Lego blocks into functional nanoscale machines.</p>
+            </div>
+
+            <!-- Bath Lab -->
+            <div class="lab-card">
+                <h3>Bath Lab – DNA-Protein Hybrids</h3>
+                <p><strong>Goal:</strong> Study hybrid molecular machines combining DNA and proteins.</p>
+                <p><strong>Papers:</strong> Example: “Programming DNA-protein motors for nanoscale motion” (Nature Nanotechnology, 2016)</p>
+                <p><strong>Simulation:</strong> Rotating DNA-protein motor</p>
+                <canvas id="bathCanvas" width="300" height="200"></canvas>
+                <p><strong>What I learned:</strong> Proteins can interact with DNA to produce motion, which can be harnessed for nanoscale transport systems.</p>
+            </div>
+
+            <!-- Turberfield Lab -->
+            <div class="lab-card">
+                <h3>Turberfield Lab – Virus-Trapping Shells</h3>
+                <p><strong>Goal:</strong> Self-assembling DNA shells to trap viruses and deliver drugs.</p>
+                <p><strong>Papers:</strong> Example: “DNA cages for virus encapsulation” (Nature Chemistry, 2015)</p>
+                <p><strong>Simulation:</strong> Virus-trapping shell animation</p>
+                <canvas id="turberfieldCanvas" width="300" height="200"></canvas>
+                <p><strong>What I learned:</strong> DNA nanostructures can act as programmable cages for biomedical applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 DNA Nanotechnology Learning Journal
+    </footer>
+
+    <!-- JavaScript for simple canvas animations -->
+    <script>
+        // Dietz Lab – DNA Origami (block folding simulation)
+        const dietzCanvas = document.getElementById('dietzCanvas');
+        const dCtx = dietzCanvas.getContext('2d');
+        let dBlocks = [];
+        for(let i=0; i<5; i++){
+            dBlocks.push({x:50+i*40, y:0});
+        }
+        function drawDietz(){
+            dCtx.clearRect(0,0,dietzCanvas.width,dietzCanvas.height);
+            dBlocks.forEach(block => {
+                dCtx.fillStyle = '#1a73e8';
+                dCtx.fillRect(block.x, block.y, 30, 30);
+                block.y += 1;
+                if(block.y > dietzCanvas.height-30) block.y=0;
+            });
+            requestAnimationFrame(drawDietz);
+        }
+        drawDietz();
+
+        // Bath Lab – Rotating DNA-Protein Hybrid
+        const bathCanvas = document.getElementById('bathCanvas');
+        const bCtx = bathCanvas.getContext('2d');
+        let angle = 0;
+        function drawBath(){
+            bCtx.clearRect(0,0,bathCanvas.width,bathCanvas.height);
+            bCtx.save();
+            bCtx.translate(bathCanvas.width/2,bathCanvas.height/2);
+            bCtx.rotate(angle);
+            bCtx.fillStyle='#e91e63';
+            bCtx.fillRect(-20,-20,40,40);
+            bCtx.restore();
+            angle += 0.02;
+            requestAnimationFrame(drawBath);
+        }
+        drawBath();
+
+        // Turberfield Lab – Virus-Trapping Shell
+        const turCanvas = document.getElementById('turberfieldCanvas');
+        const tCtx = turCanvas.getContext('2d');
+        let radius = 10;
+        let growing = true;
+        function drawTurberfield(){
+            tCtx.clearRect(0,0,turCanvas.width,turCanvas.height);
+            tCtx.beginPath();
+            tCtx.arc(turCanvas.width/2,turCanvas.height/2,radius,0,Math.PI*2);
+            tCtx.strokeStyle='#ff9800';
+            tCtx.lineWidth=3;
+            tCtx.stroke();
+            if(growing) radius+=0.5;
+            else radius-=0.5;
+            if(radius>60) growing=false;
+            if(radius<10) growing=true;
+            requestAnimationFrame(drawTurberfield);
+        }
+        drawTurberfield();
+    </script>
+</body>
+</html>

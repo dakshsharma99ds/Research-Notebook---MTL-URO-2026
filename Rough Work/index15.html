@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+     /* About Me Section */
+    section.about-section {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .about-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .about-photo {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .about-photo .photo-container {
+      position: relative;
+      width: 350px;
+      height: 420px;
+      margin: auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid rgb(43, 80, 226);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .about-photo .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-photo .photo-container .camera-icon {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      opacity: 0.8;
+    }
+
+    .about-text {
+      flex: 2;
+      min-width: 280px;
+      text-align: center;
+    }
+
+    .about-title {
+      font-family: "Dancing Script", cursive;
+      font-size: 4.5rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .about-title::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, #74b9ff, #a29bfe);
+      border-radius: 2px;
+    }
+
+    .about-intro {
+      font-size: 1.15rem;
+      max-width: 750px;
+      margin: 20px 0;
+      color: #444;
+    }
+
+    .about-quote {
+      font-style: italic;
+      color: #ffffff;
+      margin: 40px 0;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #2467aa, #d6dbe6);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(116, 185, 255, 0.25);
+      max-width: 650px;
+      transition: transform 0.3s ease;
+    }
+
+    .about-quote:hover {
+      transform: scale(1.05);
+    }
+
+    .story-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin: 60px 0;
+      padding: 60px 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fff0f5, #fdfbfb);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .story-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .story-photos img {
+      width: 260px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .story-photos img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .story-text {
+      max-width: 500px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      border-left: 5px solid #74b9ff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      text-align: left;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .story-text::before {
+      content: "✒️";
+      position: absolute;
+      top: -20px;
+      left: -15px;
+      font-size: 1.8rem;
+    }
+
+    .gallery-section {
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      padding: 60px 30px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .gallery-section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      position: relative;
+    }
+
+    .gallery-section h2::after {
+      content: "🌿";
+      margin-left: 8px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .about-closing {
+      margin-top: 50px;
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.7;
+      background: linear-gradient(135deg, #ffffff, #f6f9ff);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 700px;
+      border-top: 5px solid #a29bfe;
+    }
+
+    /* Responsive About Me */
+    @media (max-width: 768px) {
+      .about-layout {flex-direction: column; text-align: center;}
+      .about-text {text-align: center;}
+      .story-section {flex-direction: column;}
+      .story-photos {flex-direction: row; justify-content:center;}
+    }
+    </style>
+</head>
+<body>
+    <!-- About Me Section -->
+  <section class="about-section">
+    <div class="about-layout">
+      <!-- Photo -->
+      <div class="about-photo">
+        <div class="photo-container">
+          <img src="saloni.jpg" alt="Saloni Joshi">
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="about-text">
+        <h1 class="about-title">About Me</h1>
+        <p class="about-intro">
+           I’m <strong>Saloni Joshi</strong>, a 2nd-year Bachelor of Computer Applications student, fascinated by the hidden patterns in nature and how computation can help uncover them. How do small interactions create complex systems? Can code make the invisible visible? These questions drive me to explore intersections of programming, chemical networks, and molecular self-assembly.
+        </p>
+         <p>
+          Inspired by the <strong>Matter-to-Life URO program</strong>, I created this research notebook to document my discoveries, visualize scientific ideas, and experiment with interactive tools. I believe understanding emerges through action — asking questions, testing ideas, and iterating — not just observation.
+        </p>
+
+        <blockquote>
+          “This site is my exploration — from learning the science, to designing the interface, to coding every element.”
+        </blockquote>
+
+        <p>
+          Curiosity guides me, computation empowers me, and research challenges me to see beyond what’s immediately visible. What if the smallest detail could reveal a bigger truth? I aim to live these questions, one experiment and one line of code at a time.
+        </p>
+
+        <p class="about-quote">
+          “I believe the smallest details often reveal the biggest truths.”
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <div class="story-section">
+    <div class="story-photos">
+      <img src="fish1.jpg" alt="Fish Collection 1">
+      <img src="fish2.jpg" alt="Fish Collection 2">
+    </div>
+    <div class="story-text">
+      <p>
+        Since childhood, I’ve been curious about life in its tiniest forms. 
+        When bees around my home died, I used to gently open them, believing 
+        they carried babies I could save. That innocent curiosity shaped my 
+        perspective—that nature always has hidden stories waiting to be 
+        discovered. Later, I started collecting photos of fish, plants, 
+        and landscapes from my hometown, fascinated by the diversity around me.
+      </p>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="gallery-section">
+    <h2>My Nature Collection</h2>
+    <div class="gallery">
+      <img src="nature1.jpg" alt="Nature Photo 1">
+      <img src="nature2.jpg" alt="Nature Photo 2">
+      <img src="nature3.jpg" alt="Nature Photo 3">
+      <img src="nature4.jpg" alt="Nature Photo 4">
+    </div>
+  </div>
+
+  <p class="about-closing">
+    For me, science is not just in equations or code—it begins in wonder, 
+    in stories from childhood, and in the quiet details of life.  
+    That is why <b>Matter to Life</b> truly matters to me.
+  </p>
+</body>
+</html>
